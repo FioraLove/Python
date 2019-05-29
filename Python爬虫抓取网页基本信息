@@ -1,0 +1,77 @@
+# # 爬取下载图片
+# import re
+# import requests
+# f = open('sources.txt','r',encoding='utf-8')
+# html = f.read()
+# f.close()
+#
+# pic_url = re.findall('<img class="lazy" data-original="(.*?)"',html,re.S)
+# i = 0
+# for each in pic_url:
+#     print ('now downloading:'+each)
+#     pic = requests.get(each)
+#     fp = open('pic\\'+str(i)+'.jpg','wb')
+#     fp.write(pic.content)
+#     fp.close()
+#     i +=1
+
+# 抓取极客学院官网上的课程人数，课程编码，课时以及课件时间
+import requests
+import re
+import importlib
+import sys
+importlib.reload(sys)
+sys.setdefaultencoding('utf-8')
+
+class spider(object):
+    def __init__(self):
+        print("爬取内容。。。")
+
+    def getsource(self,url):
+        html = requests.get(url)
+        return html.text
+
+    def changepage(self,url,total_page):
+        now_page = int(re.search('pageNum=(\d+)',url,re.S)).group(1)
+        page_group = []
+        for i in range(now_page,total_page+1):
+            link = re.sub('pageNum=(\d+)','pageNum=%s'%i,url,re.S)
+            page_group.append(link)
+        return page_group
+
+    def geteveryclass(self,source):
+        everyclass = re.findall('(<li id="".*?</li>)',source,re.S)
+        return everyclass
+    def getinfo(self,eachclass):
+        info = {}
+        info['title'] = re.search('target="_blank">(.*?)</a>',eachclass,re.S).group(1)
+        info['content'] = re.search('</h2><p>(.*?)</p>',eachclass,re.S).group(1)
+        timeandlevel = re.findall('<em>(.*?)</em>',eachclass,re.S)
+        info['classtime'] = timeandlevel[0]
+        info['classlevel'] = timeandlevel[0]
+        info['learnnum'] = re.search('"learn-number">(.*?)</em>',eachclass,re.S).group(1)
+        return info
+    def saveinfo(self,classinfo):
+        f = open('info.txt','a')
+        for each in classinfo:
+            f.writelines('title：'+each['title']+'\n')
+            f.writelines('content；' + each['content'] + '\n')
+            f.writelines('classtime:' + each['classtime'] + '\n')
+            f.writelines('classlevel:' + each['classlevel'] + '\n')
+            f.writelines('learnnum:' + each['learnnum'] + '\n\n')
+        f.close()
+
+if __name__ == '__main__':
+    classinfo = []
+    url = 'https://www.jikexueyuan.com/course/?pageNum=1'
+    redspider = spider()
+    all_links = redspider.changepage(url,20)
+    for link in all_links:
+        print("正在处理的内容：",link)
+        html=redspider.getsource(link)
+        everyclass = redspider.geteveryclass(html)
+        for each in everyclass:
+            info = redspider.getinfo(each)
+            classinfo.append(info)
+    redspider.saveinfo(classinfo)
+
