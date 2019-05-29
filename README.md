@@ -1,2 +1,2 @@
-# Python
-用于Python学习
+# HTML
+用于HTML与CSS学习
