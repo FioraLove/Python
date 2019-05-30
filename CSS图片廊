@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title>  
+<style>
+div.img {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.img:hover {
+    border: 1px solid #777;
+}
+
+div.img img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<h2>感谢我的兄弟萌：</h2>
+<h3>陈娟  刘礼  刘文斌  张丽  魏潇慧</h3>
+<div class="responsive">
+  <div class="img">
+    <a target="_blank" href="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1325125123,170607100&fm=26&gp=0.jpg">
+      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1325125123,170607100&fm=26&gp=0.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+    <div class="desc">不爱你的人，比你想象中的还不爱你</div>
+  </div>
+</div>
+ 
+<div class="responsive">
+  <div class="img">
+    <a target="_blank" href="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3875960750,81616113&fm=26&gp=0.jpg">
+      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3875960750,81616113&fm=26&gp=0.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+    <div class="desc">酸甜苦辣是生命的富有，赤橙黄绿是人生的斑斓</div>
+  </div>
+</div>
+ 
+<div class="responsive">
+  <div class="img">
+    <a target="_blank" href="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4275067921,3958500762&fm=26&gp=0.jpg">
+      <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4275067921,3958500762&fm=26&gp=0.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+    <div class="desc">只有真正努力过的人才知道，天赋有多重要</div>
+  </div>
+</div>
+ 
+<div class="responsive">
+  <div class="img">
+    <a target="_blank" href="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=995925988,2297770235&fm=26&gp=0.jpg">
+      <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=995925988,2297770235&fm=26&gp=0.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+    <div class="desc">人们希望你做的更好，但一般不希望你超过他</div>
+  </div>
+</div>
+
+</body>
+</html>
