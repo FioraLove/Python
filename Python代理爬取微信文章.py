@@ -3,6 +3,7 @@ import requests
 from urllib.parse import urlencode
 from requests.exceptions import ConnectionError
 from multiprocessing import Pool
+from pyquery import PyQuery as pq
 
 base_url = 'https://weixin.sogou.com/weixin?'
 
@@ -20,6 +21,7 @@ headers = {
 """
 proxy_pool_url = ''  # 代理值
 proxy = None
+max_count = 5  # 最大请求次数
 
 
 # 判断代理是否起作用
@@ -29,42 +31,45 @@ def get_proxy():
         if response.status_code == 200:
             return response.text
 
-
         return None
     except ConnectionError:
         return None
 
 
-def get_html(url):
-    global proxy # 定义一个全局的代理，以免一直重复打印
+def get_html(url, count=1):
+    global proxy  # 定义一个全局的代理，以免一直重复打印
+    if count >= max_count:  # 判断是否请求次数过多
+        print('trying too much')
+
     try:  # 做一个异常处理，若状态码为302，则再发起请求
 
         if proxy:
-        proxies={
-            'http':'http://'+proxy
-        }
+            proxies = {
+                'http': 'http://' + proxy
+            }
 
-            response = requests.get(url, allow_redirects=False, headers=headers,proxies=proxies)
+            response = requests.get(url, allow_redirects=False, headers=headers, proxies=proxies)
         else:
             response = requests.get(url, allow_redirects=False, headers=headers)
-
-
 
         if response.status_code == 200:
             return response.text
         if response.status_code == 302:
 
-        # return response.text
+            # return response.text
 
             print('302')
-            proxy =get_proxy()
-            if proxy :
-                print('using proxy',proxy)
+            proxy = get_proxy()
+            if proxy:
+                print('using proxy', proxy)
                 return get_html(url)
             else:
                 print('get proxy faild')
                 return None
-    except ConnectionError:
+    except ConnectionError as e:
+        print('Error Occurred', e.args)
+        proxy = get_proxy()
+        count += 1
         return get_html(url)
 
 
@@ -84,10 +89,21 @@ def get_index(keyword, page):
     return html
 
 
+# 解析索引页
+def parse_index(html):
+    doc = pq(html)
+    items = doc('')
+    for item in items:
+        yield item.attr('href')
+
+
 def main():
     for page in range(2, 101):
         html = get_index(keyword, page)
-        print(html)
+        if html:
+            article_urls = parse_index(html)
+            for article_url in article_urls:
+                print(article_url)
 
 
 if __name__ == '__main__':
