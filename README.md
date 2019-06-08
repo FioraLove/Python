@@ -1,3 +1,5 @@
+Python第三方库安装，点击链接https://pypi.org/ ，搜索所需的三方库的.whl文件，下载完成后修改为.zip，解压后将文件保存在python的lib，libs文件下
+
 ## Python - 100天从新手到大师
 
 >转载
