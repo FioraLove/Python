@@ -34,10 +34,13 @@ class singleLinkList(object):
         while cur != None:
             print(cur.elem)
             cur = cur.next
+        print('')
 
     def add(self, item):
-        """链表头部添加元素"""
-        pass
+        """链表头部添加元素，头插法"""
+        node =Node(item)  #新建一个节点
+        node.next=self._head  # 新节点的next指向下一节点的_head
+        node._head =node  # _head指向新节点
 
     def append(self,item):
         """链表尾部添加元素"""
@@ -51,9 +54,23 @@ class singleLinkList(object):
                 cur = cur.next
             cur.next = node
 
-    def insert(self):
+    def insert(self,pos,item):  # pos指明添加的位置
         """指定位置添加元素"""
-        pass
+        if pos<=0:
+            self.add(item)
+        elif pos>(self.length()-1):
+            self.append(item)
+        else:
+            pre = self._head
+            count = 0
+            while count<(pos -1):
+                count +=1
+                pre = pre.next
+            # 当循环退出后，pre指向pos-1的位置
+            node = Node(item)
+            node.next = pre.next
+            pre.next = node
+
     def remove(self):
         """删除节点"""
         pass
@@ -71,6 +88,7 @@ if __name__ == '__main__':
     print(ll.length())
 
     ll.append(2)
+    ll.add(8)
     ll.append(3)
     ll.append(4)
 
