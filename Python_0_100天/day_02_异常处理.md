@@ -39,3 +39,39 @@ TypeError 传入对象类型与要求的不符合
 UnboundLocalError 试图访问一个还未被设置的局部变量，基本上是由于另有一个同名的全局变量，
 导致你以为正在访问它
 ValueError 传入一个调用者不期望的值，即使值的类型是正确的
+
+3、异常其他结构
+try:
+    # 主代码块
+    pass
+except KeyError,e:
+    # 异常时，执行该块
+    pass
+else:
+    # 主代码块执行完，执行该块
+    pass
+finally:
+    # 无论异常与否，最终执行该块
+    pass
+    
+    
+4、主动触发异常
+try:
+    raise Exception('错误了。。。')
+except Exception,e:
+    print e
+    
+    
+5、自定义异常
+class WupeiqiException(Exception):
+ 
+    def __init__(self, msg):
+        self.message = msg
+ 
+    def __str__(self):  # _str__是Django的一个内置方法。str一般是用于说明类的说明，或者定义自己想要的输出结果
+        return self.message
+ 
+try:
+    raise WupeiqiException('我的异常')
+except WupeiqiException,e:
+    print e
