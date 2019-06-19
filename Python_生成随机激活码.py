@@ -52,7 +52,7 @@ height = 60
 image = Image.new('RGB', (width, height), (255, 255, 255))
 # 设置字体类型
 font = ImageFont.truetype('C:/Windows/Fonts/Arial.ttf', 36)
-# 进行画图
+# 进行画图,创建一个画笔
 draw = ImageDraw.Draw(image)
 # 遍历x，y，可组成一个宽度为x，高度为y的长方形
 for x in range(width):
