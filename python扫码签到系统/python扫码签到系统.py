@@ -4,7 +4,7 @@ from flask import render_template
 from flask import request
 import csv
 
-app = Flask(__name__)
+app = Flask(__name__)  # 创建一个Web应用
 
 with open('签到表单.csv', 'a', newline='') as f:
     csvwriter = csv.writer(f, dialect='excel')
@@ -37,5 +37,5 @@ def cg():
         csvwriter.writerow([name, sex, age, Tel])
     return render_template('HTML4.html')
 
-
-app.run()
+#  debug开启这个功能后，我们每次修改完代码，Web应用对自动进行调整
+app.run(host='127.0.0.1',port=8080,debug=True)  # 运行，指定监听地址为 127.0.0.1:8080
