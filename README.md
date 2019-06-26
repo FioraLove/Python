@@ -47,6 +47,12 @@ Python第三方库安装，点击链接https://pypi.org/ ，搜索所需的三�
 - Don't be one of the leeches.
 - Either stand out or kicked out.
 
+Python常见知识点：
+
+-input()与raw_input()区别：a=raw_input("有关输入的描述")：用来获取控制台的输入,并返回（有关输入的描述），将所有输入作为字符串看待，返回的是字符串类型
+
+-input("输入文字") ：用来获取控制台的输入，它希望能够读取一个合法的 python表达式，即一个符合python语法的表达式，例如当你输入字符串的时候必须使用引号将它括起来，否则它会引发一个SyntaxError
+
 ### Day01~15 - [Python语言基础](./Day01-15)
 
 #### Day01 - [初识Python](./Day01-15/Day01/初识Python.md)
