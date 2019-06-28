@@ -7,9 +7,9 @@ class Node(object):
 
 n1 = Node('n1', None)
 n2 = Node('n2', n1)
-n3 = Node('n2', n2)
-n4 = Node('n2', n3)
-n5 = Node('n2', n4)
+n3 = Node('n3', n2)
+n4 = Node('n4', n3)
+n5 = Node('n5', n4)
 
 head = n5
 P1 = head
