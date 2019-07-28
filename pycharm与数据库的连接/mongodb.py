@@ -4,6 +4,26 @@ pycharm与mongodb的连接：
   2.cmd下，进入数据库存储data位置：mongod --dbpath D:\mongodb\data
   3.打开服务，启动mongodb
 """
+
+"""
+    mongodb使用教程(方法二）：
+    1.启动服务,将mongodb服务打开
+    
+    2.进入cmd命令，键入mongo（表示已进入了mongodb数据库）
+    
+    3.基本指令：
+        show dbs 展示所有数据库
+        show database 显示当前数据库
+        use + 数据库名 进入到指定数据库
+        db  表示当前所处的数据库
+        show collections 显示数据库中所有集合（表）
+        
+        db.表名.insert(语句) 向集合（表）中插入文档
+            -eg:db.students.insert({name:'chd',age:18})
+            
+        db.表.find() 查询当前集合中的所有的文档
+        
+"""
 # mongodb测试代码一：
 from pymongo import MongoClient
 
