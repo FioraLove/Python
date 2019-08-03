@@ -1,9 +1,7 @@
-import os
 
-# 写一个验证登录的装饰函数
-login_status = False
-
+import os,time
 # 定义一个装饰器函数。参数为被装饰的函数的内存地址（即函数名）
+login_status = False
 def login(fun):
     # 判读用户信息的文件是否存在
     file = os.path.exists('user_info.txt')
@@ -14,15 +12,19 @@ def login(fun):
             user_info = eval(f.read())
 
     else:
-        choice = input("是否注册用户？[Y/N]")
-        if choice == 'Y' or choice == 'N':
+        # 使得输入的字符全部变为小写
+        choice = input("是否注册用户？[Y/N]").lower()
+        if choice == 'Y' or choice == 'y':
             name = str(input("请输入新用户用户名："))
             password = str(input("请输入新用户密码："))
             user_info = {'name': name, 'password': password}
 
-        with open('user_info.txt', 'w', encoding='utf-8') as f:
-            # f.wwrite()仅能写入str型数据
-            f.write(str(user_info))
+            with open('user_info.txt', 'w', encoding='utf-8') as f:
+                # f.write()仅能写入str型数据
+                f.write(str(user_info))
+
+
+
 
     def logind():
         _username = user_info['name']
@@ -37,49 +39,28 @@ def login(fun):
             else:
                 print('the name or password is worng')
         if login_status:
-        # 可以运用嵌套函数，在login中再定义一层。
-        # 重点处：该代码表示实现被装饰函数的功能
             fun()
-    # 重点处：login只返回里层函数的函数名，下次执行被装饰函数时再调用里层函数。
+
     return logind
-
-
-# 写一个计时统计的装饰函数
-import time
-
-
-def time_total(func):
-    def inner():
-        start = time.time()
-        func()
-        wait_time = time.time() - start
-        print("%s 运行时间:" % func.__name__, wait_time)
-
-    return inner
-
 
 a = time.localtime()
 
-
-@time_total
+@login
 def log_1():
-    print('%s-%s-%s:\n' % (a.tm_year, a.tm_mon, a.tm_mday))
+    print('%s-%s-%s-%s-%s' % (a.tm_year, a.tm_mon, a.tm_mday,a.tm_min,a.tm_sec))
 
-
-@time_total
+@login
 def log_2():
     time.sleep(2)
-    print('%s-%s-%s:\n' % (a.tm_year, a.tm_mon, a.tm_mday))
-
+    print('%s-%s-%s-%s-%s' % (a.tm_year, a.tm_mon, a.tm_mday,a.tm_min,a.tm_sec))
 
 @login
 def log_3():
     time.sleep(4)
-    print('%s-%s-%s:' % (a.tm_year, a.tm_mon, a.tm_mday))
+    print('%s-%s-%s-%s-%s' % (a.tm_year, a.tm_mon, a.tm_mday,a.tm_min,a.tm_sec))
 
 
 log_1()
 log_2()
 log_3()
 
-# 装饰器一般格式：
