@@ -26,3 +26,48 @@ def bubbleSort(myList):
 print("冒泡排序执行如下: ")
 myList = [1, 4, 5, 0, 6]
 bubbleSort(myList)
+
+# 查找算法的改进优化
+ef bubble_sort(items):
+    k = 0
+    for i in range(len(items) - 1):
+        flag = False
+        for j in range(len(items) - 1 - i):
+            if items[j] > items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+                flag = True
+                k += 1
+                print(items)
+        if not flag:
+            break
+    return items, k
+
+
+# 冒泡排序优化二：搅拌排序，双向排序提高效率，即当一次从左向右的排序结束后，立马从右向左排序
+def new_bubble_sort(items):
+    for i in range(len(items) - 1):
+        flag = False
+        for j in range(len(items) - 1 - i):
+            if items[j] > items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+                flag = True
+
+        if flag:
+            flag = False
+            for j in range(len(items) - 2 - i, 0, -1):
+                if items[j - 1] > items[j]:
+                    items[j], items[j - 1] = items[j - 1], items[j]
+                    flag = True
+
+        if not flag:
+            break
+
+    return items
+
+
+if __name__ == '__main__':
+    items = [2, 1, 9, 11, 10, 8, 7]
+    a = new_bubble_sort(items)
+    print(a)
+    print('排列过程为：')
+    print('结果为：%s ,排列次数为：%s' % bubble_sort(items))
