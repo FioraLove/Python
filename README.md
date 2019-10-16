@@ -33,7 +33,7 @@ Python第三方库安装，点击链接https://pypi.org/ ，搜索所需的三�
 
 下图显示了主要城市Python招聘需求量及薪资待遇排行榜（截止到2018年5月）。
 
-![Python招聘需求及薪资待遇Top 10](./res/python-top-10.png)
+![Python招聘需求及薪资待遇Top 10](https://github.com/FioraLove/Python-100-Days/blob/master/res/python-top-10.png)
 
 ![](./res/python-bj-salary.png)
 
